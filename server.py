@@ -35,7 +35,7 @@ try:
         print(f"Premi CTRL+C per fermare il server")
         httpd.serve_forever()
 except OSError as e:
-    if e.errno == 98:  # Address already in use
+    if e.errno in (98, 10048):  # Address already in use (Linux: 98, Windows: 10048)
         print(f"Errore: La porta {PORT} è già in uso.")
         print(f"Prova con un'altra porta: python3 server.py <numero_porta>")
     else:
